@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mohammad Faramarzi — Front-End Developer & Instructor</title>
+<meta name="description" content="Front-end developer building fast maps, dashboards and web apps with Next.js, React and three.js. Instructor at AIOLearn.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--bg:#f2f6fa;--fg:#0d1b2a;--mut:#4d6178;--line:#c9d6e3;--amber:#b86a00;--sky:#0a78b8;--gl:rgba(255,255,255,.55);--gl-b:rgba(255,255,255,.85);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08121f;--fg:#e8f0f8;--mut:#93a9c0;--line:#1c2e44;--amber:#ffb454;--sky:#5cc8ff;--gl:rgba(22,42,68,.42);--gl-b:rgba(170,215,255,.2)}}
+:root[data-theme="dark"]{--bg:#08121f;--fg:#e8f0f8;--mut:#93a9c0;--line:#1c2e44;--amber:#ffb454;--sky:#5cc8ff;--gl:rgba(22,42,68,.42);--gl-b:rgba(170,215,255,.2)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:auto}
+body{background:var(--bg);color:var(--fg);font-family:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,nav,footer{position:relative;z-index:1}
+.mut{color:var(--mut)}.amber{color:var(--amber)}.sky{color:var(--sky)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.h1{font-size:clamp(2.6rem,8.5vw,6.6rem);line-height:.95;font-weight:800;letter-spacing:-.035em}
+.h2{font-size:clamp(1.9rem,4.5vw,3.2rem);line-height:1.05;font-weight:800;letter-spacing:-.025em}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}.w>span{display:inline-block}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:999px;font-weight:600;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.b1{background:var(--amber);color:#08121f}.b2{background:var(--gl);border:1px solid var(--gl-b);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.b2:hover{background:var(--gl-b)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+.tl{position:relative;padding-left:2rem}.tl-line{position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--amber);transform-origin:top}
+.tl-rail{position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.dot{position:absolute;left:0;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--amber)}
+.proj{display:grid;grid-template-columns:1fr;gap:.6rem;padding:1.5rem;margin-bottom:1rem;transition:transform .35s,box-shadow .35s}
+@media(min-width:768px){.proj{grid-template-columns:1.3fr 1.4fr auto;align-items:center;gap:2rem}}.proj:hover{transform:translateY(-4px);box-shadow:0 24px 50px -16px rgba(0,0,0,.5),0 0 0 1px var(--sky),inset 0 1px 0 rgba(255,255,255,.3)}
+.proj .arr{transition:transform .3s}.proj:hover .arr{transform:translate(4px,-4px)}
+.chip{background:var(--gl);border:1px solid var(--gl-b);border-radius:999px;padding:.3rem .8rem;font-size:.9rem}
+.mq{display:flex;gap:3rem;white-space:nowrap;width:max-content;animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.mq{animation:none}}
+.glass{position:relative;border-radius:1.5rem;background:linear-gradient(135deg,var(--gl),color-mix(in srgb,var(--gl) 35%,transparent));backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border:1px solid var(--gl-b);box-shadow:0 12px 40px -14px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.28)}
+.glass::before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(360px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.glass:hover::before{opacity:1}
+.aur{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.aur i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.3;will-change:transform;animation:fl 24s ease-in-out infinite}
+@keyframes fl{50%{transform:translate(5vw,-4vw) scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.aur i{animation:none}}
+.tl article .dot{left:-2rem;top:1.9rem;box-shadow:0 0 12px var(--amber)}
+.bot{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;max-width:min(340px,calc(100vw - 2rem))}
+.bub{padding:1rem 1.1rem;font-size:.98rem;line-height:1.45}.bub[hidden]{display:none}
+.bub button{font:inherit}.qk{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.qk button,.x{background:var(--gl);border:1px solid var(--gl-b);border-radius:999px;padding:.25rem .8rem;font-size:.85rem;cursor:pointer;color:var(--fg)}
+.qk button:hover,.x:hover{background:var(--gl-b)}
+.rb{width:76px;height:84px;cursor:pointer;background:none;border:0;animation:hov 3.5s ease-in-out infinite;filter:drop-shadow(0 10px 14px rgba(0,0,0,.4))}
+@keyframes hov{50%{transform:translateY(-7px)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:bl 4.5s infinite}
+@keyframes bl{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@media(prefers-reduced-motion:reduce){.rb,.eye{animation:none}}
+.dl li{position:relative;padding-left:1.4rem;margin-bottom:.7rem}.dl li::before{content:'';position:absolute;left:0;top:.6em;width:.55rem;height:.55rem;border-radius:50%;background:var(--amber)}
+#lang button{padding:.2rem .6rem;border-radius:999px;border:1px solid transparent;color:var(--mut);cursor:pointer;background:none}
+#lang button[aria-pressed=true]{background:var(--gl-b);color:var(--fg);border-color:var(--gl-b)}
+.mq{direction:ltr}
+[dir=rtl] body{font-family:'Vazirmatn','Bricolage Grotesque',system-ui,sans-serif}
+[dir=rtl] .h1,[dir=rtl] .h2{letter-spacing:0;line-height:1.3}
+[dir=rtl] .w{padding-bottom:.25em}
+[dir=rtl] .tl{padding-left:0;padding-right:2rem}
+[dir=rtl] .tl-rail,[dir=rtl] .tl-line{left:auto;right:5px}
+[dir=rtl] .tl article .dot{left:auto;right:-2rem}
+[dir=rtl] .dl li{padding-left:0;padding-right:1.4rem}[dir=rtl] .dl li::before{left:auto;right:0}
+[dir=rtl] .bot{right:auto;left:1rem;align-items:flex-start}
+[dir=rtl] .proj .arr{display:inline-block;transform:scaleX(-1)}
+</style>
+</head>
+<body>
+<div class="aur" aria-hidden="true"><i style="width:46vw;height:46vw;left:-10vw;top:-8vw;background:var(--sky)"></i><i style="width:40vw;height:40vw;right:-8vw;top:30vh;background:var(--amber);animation-delay:-8s"></i><i style="width:36vw;height:36vw;left:25vw;bottom:-12vw;background:#7a5cff;animation-delay:-15s"></i></div>
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<nav class="fixed left-0 right-0 z-50" style="top:env(safe-area-inset-top,0px)">
+  <div class="wrap"><div class="glass flex items-center justify-between px-5 py-3 mt-3" style="border-radius:999px">
+    <a href="#top" class="font-extrabold tracking-tight text-lg">Mohammad Faramarzi</a>
+    <div class="hidden sm:flex gap-6 mut text-sm">
+      <a href="#about" class="hover:opacity-70">About</a><a href="#work" class="hover:opacity-70">Experience</a><a href="#projects" class="hover:opacity-70">Projects</a><a href="#stack" class="hover:opacity-70">Stack</a><a href="#contact" class="hover:opacity-70">Contact</a>
+    </div>
+    <div id="lang" class="flex gap-1 text-sm" role="group" aria-label="Language"><button data-l="en" aria-pressed="true">EN</button><button data-l="fa">فارسی</button><button data-l="ar">العربية</button></div>
+  </div></div>
+</nav>
+
+<main id="top"><div id="home">
+<section class="min-h-[100svh] flex items-center">
+  <div class="wrap w-full pt-24 pb-16">
+    <p class="glass inline-flex items-center gap-2 px-4 py-2 mb-6 hero-in" style="border-radius:999px"><span class="inline-block w-2 h-2 rounded-full" style="background:var(--amber);box-shadow:0 0 10px var(--amber)"></span>Front-end developer and instructor in Tehran</p>
+    <h1 class="h1" id="h1" aria-label="I turn satellite data into interfaces people can use.">I turn satellite data into interfaces people can use.</h1>
+    <p class="mut mt-7 max-w-xl text-lg hero-in">I build fast, map-heavy web apps with Next.js, React and Mapbox, and I teach students how to do the same.</p>
+    <div class="mt-9 flex flex-wrap gap-3 hero-in">
+      <a href="#projects" class="btn b1">See my projects</a>
+      <a href="mailto:faramarzi.dev@gmail.com" class="btn b2">Email me</a>
+    </div>
+  </div>
+</section>
+
+<section class="py-6 overflow-hidden border-y" style="border-color:var(--gl-b);background:var(--gl);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)" aria-label="Technologies">
+  <div class="mq mut text-2xl font-semibold" id="mq"></div>
+</section>
+
+<section id="about" class="py-28">
+  <div class="wrap grid md:grid-cols-[1fr_2fr] gap-10">
+    <h2 class="h2 rv">A developer who also teaches.</h2>
+    <div class="rv">
+      <p class="text-xl md:text-2xl leading-snug">For over a year I have built web apps that let people compare satellite images, classify land use in real time and read environmental data on a map.</p>
+      <p class="mut mt-5 text-lg max-w-2xl">Today I split my time between shipping features and teaching. Explaining code to students makes me write cleaner code, and shipping real work makes me a better teacher.</p>
+      <div class="mt-10 grid grid-cols-3 gap-4 max-w-lg">
+        <div class="glass p-4"><div class="text-4xl font-extrabold amber"><span class="cnt" data-n="1">0</span>+</div><div class="mut text-sm mt-1">years building for the web</div></div>
+        <div class="glass p-4"><div class="text-4xl font-extrabold sky"><span class="cnt" data-n="3">0</span></div><div class="mut text-sm mt-1">live projects online</div></div>
+        <div class="glass p-4"><div class="text-4xl font-extrabold amber"><span class="cnt" data-n="4">0</span></div><div class="mut text-sm mt-1">months teaching so far</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="py-24">
+  <div class="wrap">
+    <h2 class="h2 mb-14 rv">Where I have worked</h2>
+    <div class="tl max-w-3xl" id="tl">
+      <div class="tl-rail"></div><div class="tl-line" id="tlline"></div>
+      <article class="glass relative p-6 mb-6 rv"><span class="dot"></span>
+        <div class="mut text-sm">May 2026 to now</div>
+        <h3 class="text-2xl font-bold mt-1">Web Developer and Instructor, AIOLearn</h3>
+        <p class="mut mt-3 text-lg">I teach web development to students, review their code, guide them through hands-on projects and help build the platform itself.</p>
+      </article>
+      <article class="glass relative p-6 mb-6 rv"><span class="dot"></span>
+        <div class="mut text-sm">Early 2026 to May 2026</div>
+        <h3 class="text-2xl font-bold mt-1">Freelance Full-Stack Developer</h3>
+        <p class="mut mt-3 text-lg">I delivered a clinic website from requirements to deployment, with a secure custom admin panel so the owner can manage content without technical help. I also advised on SEO and load speed.</p>
+      </article>
+      <article class="glass relative p-6 rv"><span class="dot"></span>
+        <div class="mut text-sm">March 2025 to now</div>
+        <h3 class="text-2xl font-bold mt-1">Front-End Developer, Sedreh and Data Pardaz</h3>
+        <p class="mut mt-3 text-lg">I built the image comparison tool for satellite photos taken at different times, a WebSocket-driven land-classification view, KML upload, offline maps and 3D imagery.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="py-24">
+  <div class="wrap">
+    <h2 class="h2 mb-10 rv">Projects you can open</h2>
+    <div>
+      <a class="proj glass rv" href="#/p/moini">
+        <div><h3 class="text-2xl font-bold">Moini Clinic</h3><p class="mut mt-1">Clinic website with doctor profiles, services, articles and a secure admin dashboard.</p></div>
+        <div class="flex flex-wrap gap-2"><span class="chip">Next.js</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">MongoDB</span></div>
+        <span class="arr text-2xl sky" aria-hidden="true">↗</span>
+      </a>
+      <a class="proj glass rv" href="#/p/vira">
+        <div><h3 class="text-2xl font-bold">Vira by Sedreh</h3><p class="mut mt-1">Land-use change monitoring, georeferencing and AI change detection on satellite imagery.</p></div>
+        <div class="flex flex-wrap gap-2"><span class="chip">React</span><span class="chip">Mapbox</span><span class="chip">WebSocket</span></div>
+        <span class="arr text-2xl sky" aria-hidden="true">↗</span>
+      </a>
+      <a class="proj glass rv" href="#/p/sedreh">
+        <div><h3 class="text-2xl font-bold">Sedreh AI</h3><p class="mut mt-1">Environmental data, air pollution and weather views built on the same geospatial platform.</p></div>
+        <div class="flex flex-wrap gap-2"><span class="chip">Next.js</span><span class="chip">Redux Toolkit</span><span class="chip">3D imagery</span></div>
+        <span class="arr text-2xl sky" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="py-24">
+  <div class="wrap grid md:grid-cols-[1fr_2fr] gap-10">
+    <h2 class="h2 rv">What I build with</h2>
+    <div class="glass p-7 space-y-6 rv text-lg">
+      <p><span class="amber font-semibold">Interface.</span> <span class="mut">HTML5, CSS3, JavaScript, TypeScript, React, Next.js, Tailwind CSS, Figma</span></p>
+      <p><span class="sky font-semibold">Maps and 3D.</span> <span class="mut">Mapbox, KML, offline maps, three.js, GSAP</span></p>
+      <p><span class="amber font-semibold">Data.</span> <span class="mut">Redux Toolkit, React Query, RTK Query, REST, GraphQL, WebSocket</span></p>
+      <p><span class="sky font-semibold">Back end and tools.</span> <span class="mut">Node.js, Express, MongoDB, Git</span></p>
+      <p class="mut">Computer Engineering (Software), Azad University. English at intermediate level.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="py-24">
+  <div class="wrap"><div class="glass p-8 md:p-14">
+    <h2 class="h1 rv" style="font-size:clamp(2.2rem,7vw,5rem)">Have a map, a dashboard or a class in mind?</h2>
+    <a href="mailto:faramarzi.dev@gmail.com" class="inline-block mt-8 text-2xl md:text-4xl font-bold amber underline underline-offset-8 rv break-all">faramarzi.dev@gmail.com</a>
+    <div class="mt-8 flex gap-3 flex-wrap rv">
+      <a class="btn b2" href="https://linkedin.com/in/mohammadfaramarzii" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn b2" href="https://github.com/mohammadfaramarzi1" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div></div>
+</section>
+</div>
+<section id="detail" hidden class="pt-32 pb-24"><div class="wrap" id="dbody" style="max-width:820px"></div></section>
+</main>
+<div class="bot"><div class="glass bub" id="bub" role="status" aria-live="polite"><div id="bt"></div><div class="qk"><button data-q="skills">My skills</button><button data-q="projects">Projects</button><button data-q="contact">Contact</button><button class="x" data-q="hide" aria-label="Hide guide">Hide</button></div></div>
+<button class="rb" id="rb" aria-label="Open the guide robot"><svg viewBox="0 0 76 84" width="76" height="84" aria-hidden="true"><line x1="38" y1="4" x2="38" y2="16" stroke="var(--mut)" stroke-width="2"/><circle cx="38" cy="5" r="4" fill="var(--amber)"/><rect x="10" y="16" width="56" height="42" rx="16" fill="var(--gl-b)" stroke="var(--sky)" stroke-width="2"/><rect x="16" y="23" width="44" height="28" rx="11" fill="#08121f"/><ellipse class="eye" cx="28" cy="37" rx="5" ry="6" fill="var(--sky)"/><ellipse class="eye" cx="48" cy="37" rx="5" ry="6" fill="var(--sky)"/><rect x="22" y="62" width="32" height="18" rx="9" fill="var(--gl-b)" stroke="var(--sky)" stroke-width="2"/><circle cx="38" cy="71" r="3" fill="var(--amber)"/></svg></button></div>
+<footer class="wrap pb-10 mut text-sm">© 2026 Mohammad Faramarzi</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+// marquee
+const tech=['React','Next.js','TypeScript','Mapbox','three.js','GSAP','Tailwind','Redux Toolkit','React Query','Node.js','MongoDB','GraphQL'];
+const mq=document.getElementById('mq');
+mq.innerHTML=[...tech,...tech].map(t=>'<span>'+t+'</span>').join('');
+// headline split
+const h1=document.getElementById('h1');
+h1.innerHTML=h1.textContent.split(' ').map(w=>'<span class="w"><span>'+w+'</span></span>').join(' ');
+gsap.registerPlugin(ScrollTrigger);
+if(!reduce){
+  gsap.from('#h1 .w>span',{yPercent:110,duration:1.1,ease:'power4.out',stagger:.07,delay:.15});
+  gsap.from('.hero-in',{y:24,opacity:0,duration:.9,ease:'power3.out',stagger:.12,delay:.7});
+  gsap.utils.toArray('.rv').forEach(el=>gsap.from(el,{y:36,opacity:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}}));
+  gsap.fromTo('#tlline',{scaleY:0},{scaleY:1,ease:'none',scrollTrigger:{trigger:'#tl',start:'top 70%',end:'bottom 70%',scrub:true}});
+}
+document.querySelectorAll('.cnt').forEach(el=>{const n=+el.dataset.n,o={v:0};
+  ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>gsap.to(o,{v:n,duration:reduce?0:1.4,ease:'power2.out',onUpdate:()=>el.textContent=Math.round(o.v)})});});
+// 3D globe
+const cv=document.getElementById('gl');
+let R;try{R=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:false,powerPreference:'high-performance'})}catch(e){return}
+R.setPixelRatio(Math.min(devicePixelRatio,1.5));
+const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(45,1,.1,50);C.position.z=6.5;
+const G=new THREE.Group();S.add(G);
+function sphere(n,r){const a=new Float32Array(n*3),g=Math.PI*(3-Math.sqrt(5));
+  for(let i=0;i<n;i++){const y=1-2*(i+.5)/n,q=Math.sqrt(1-y*y),t=g*i;a[i*3]=Math.cos(t)*q*r;a[i*3+1]=y*r;a[i*3+2]=Math.sin(t)*q*r}
+  return a}
+function pts(arr,size,col,op){const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(arr,3));
+  const m=new THREE.PointsMaterial({size,color:new THREE.Color(col),transparent:true,opacity:op,depthWrite:false,sizeAttenuation:true});
+  const p=new THREE.Points(geo,m);G.add(p);return m}
+const base=sphere(2600,1.9),lights=[];
+for(let i=0;i<base.length;i+=3)if(Math.random()<.06)lights.push(base[i],base[i+1],base[i+2]);
+const m1=pts(base,.016,css('--sky'),.75),m2=pts(new Float32Array(lights).map(v=>v*1.005),.045,css('--amber'),.95);
+const core=new THREE.Mesh(new THREE.SphereGeometry(1.86,32,24),new THREE.MeshBasicMaterial({colorWrite:false}));G.add(core);
+const ringG=new THREE.Group();ringG.rotation.set(1.15,0,.35);G.add(ringG);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(2.7,.006,6,180),new THREE.MeshBasicMaterial({color:new THREE.Color(css('--sky')),transparent:true,opacity:.5}));ringG.add(ring);
+const sat=new THREE.Mesh(new THREE.SphereGeometry(.05,12,12),new THREE.MeshBasicMaterial({color:new THREE.Color(css('--amber'))}));ringG.add(sat);
+let W,H,off=0;
+function size(){W=innerWidth;H=innerHeight;R.setSize(W,H,false);C.aspect=W/H;C.updateProjectionMatrix();
+  off=W>820?1.9:0;G.position.x=off;G.scale.setScalar(W>820?1:.7);G.position.y=W>820?0:1.4}
+size();addEventListener('resize',size);
+let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5},{passive:true});
+if(!reduce){
+  const tl=gsap.timeline({scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:1}});
+  tl.to(G.position,{x:()=>W>820?-off:0,y:()=>W>820?.2:2,ease:'none'},0).to(G.rotation,{z:.6},0)
+    .to(G.position,{x:()=>W>820?off:0,ease:'none'},.4).to(G.position,{x:0,y:0,ease:'none'},.75)
+    .to(C.position,{z:5,ease:'none'},.75).to(G.rotation,{z:0},.4);
+}
+addEventListener('pointermove',e=>{const g=e.target.closest&&e.target.closest('.glass');if(g){const r=g.getBoundingClientRect();g.style.setProperty('--mx',e.clientX-r.left+'px');g.style.setProperty('--my',e.clientY-r.top+'px')}},{passive:true});
+let vis=true;new IntersectionObserver(()=>{},{}).observe(cv);
+document.addEventListener('visibilitychange',()=>vis=!document.hidden);
+let t=0;
+function loop(){requestAnimationFrame(loop);if(!vis)return;t+=.01;
+  G.rotation.y+=reduce?0:.0016;G.rotation.x+=((my*.4)-G.rotation.x)*.04;G.rotation.y+=mx*.0008;
+  sat.position.set(Math.cos(t)*2.7,Math.sin(t)*2.7,0);
+  m2.opacity=.7+Math.sin(t*2)*.25;R.render(S,C)}
+loop();
+})();
+</script>
+<script>
+(function(){
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const P={
+moini:{t:'Moini Clinic',url:'https://moiniclinic.com',client:'Dr. Moini, Moini Beauty Clinic',when:'Early 2026',role:'Full-stack developer, freelance',stack:['Next.js','Node.js','Express','MongoDB'],intro:'A website for a beauty clinic that presents its doctors, services and articles. The owner can update everything from a secure admin panel without technical help.',bul:['Delivered the project end to end, from gathering requirements to final deployment.','Used Next.js server-side rendering to improve SEO and first load speed.','Built the back end with Node.js and Express, with stable RESTful APIs.','Designed MongoDB schemas for doctors, services and articles that keep searches fast.','Built an admin dashboard with login, protected routes, and create, read, update and delete for site content.','Designed a clean interface that introduces doctors and services to patients.','Wrote clean code and technical documentation so other teams can maintain it.'],say:'Moini Clinic: a full-stack site delivered from requirements to launch, with an admin panel the owner can run alone.'},
+vira:{t:'Vira by Sedreh',url:'https://vira.sedrehgroup.ir',client:'Data Pardaz',when:'Autumn 2025',role:'Front-end developer',stack:['Next.js','React','TypeScript','Mapbox','Tailwind CSS'],intro:'A geospatial platform that analyzes satellite imagery to monitor how land use changes over time.',bul:['Land-use change monitoring, built on processed satellite imagery.','Georeferencing: matches an uploaded image to its likely real-world location and helps tell AI-generated images from real satellite photos.','Interfaces for AI features such as change detection, georeferencing and land-use classification.'],say:'Vira turns satellite images into answers: what changed, and where on Earth an image was taken.'},
+sedreh:{t:'Sedreh AI',url:'https://test.sedrehai.ir',client:'Sedreh (Earth Surveillance)',when:'Early 2025',role:'Front-end developer',stack:['Next.js','React','Mapbox','Redux Toolkit','WebSocket'],intro:'An environmental intelligence platform that shows satellite imagery, land classification and environmental data on interactive maps.',bul:['Built Compare Images, which shows the differences between two satellite images taken at different times, such as weather and humidity changes.','Built a WebSocket-driven land classification view showing snow and rainfall percentage, barren land ratio and agricultural coverage for a region the user selects.','Added KML file upload, offline maps and 3D imagery.','Worked on change detection, object detection, georeferencing and land-use monitoring interfaces.'],say:'Sedreh AI: compare satellite images across time and classify land live, right on the map.'}};
+const keys=Object.keys(P),home=document.getElementById('home'),det=document.getElementById('detail'),body=document.getElementById('dbody');
+const T=[["About","درباره من","نبذة"],["Experience","سوابق","الخبرة"],["Projects","پروژه‌ها","المشاريع"],["Stack","مهارت‌ها","التقنيات"],["Contact","تماس","تواصل"],["Mohammad Faramarzi","محمد فرامرزی","محمد فرامرزي"],
+["Front-end developer and instructor in Tehran","توسعه‌دهنده فرانت‌اند و مدرس در تهران","مطوّر واجهات أمامية ومدرّس في طهران"],
+["I build fast, map-heavy web apps with Next.js, React and Mapbox, and I teach students how to do the same.","با Next.js، React و Mapbox اپلیکیشن‌های وب سریع و نقشه‌محور می‌سازم و به دانشجویان یاد می‌دهم چطور همین کار را بکنند.","أبني تطبيقات ويب سريعة تعتمد على الخرائط باستخدام Next.js وReact وMapbox، وأعلّم الطلاب كيف يفعلون ذلك."],
+["See my projects","مشاهده پروژه‌ها","شاهد مشاريعي"],["Email me","ایمیل بزنید","راسلني"],
+["A developer who also teaches.","توسعه‌دهنده‌ای که تدریس هم می‌کند.","مطوّر يُدرّس أيضًا."],
+["For over a year I have built web apps that let people compare satellite images, classify land use in real time and read environmental data on a map.","بیش از یک سال است اپلیکیشن‌هایی می‌سازم که به کاربران اجازه می‌دهند تصاویر ماهواره‌ای را مقایسه کنند، کاربری زمین را لحظه‌ای طبقه‌بندی کنند و داده‌های محیطی را روی نقشه ببینند.","منذ أكثر من عام أبني تطبيقات ويب تتيح مقارنة صور الأقمار الصناعية، وتصنيف استخدام الأراضي لحظيًا، وقراءة البيانات البيئية على الخريطة."],
+["Today I split my time between shipping features and teaching. Explaining code to students makes me write cleaner code, and shipping real work makes me a better teacher.","امروز وقتم را بین توسعه قابلیت‌ها و تدریس تقسیم می‌کنم. توضیح دادن کد به دانشجویان مرا به کدنویسی تمیزتر می‌رساند و کار واقعی مرا معلم بهتری می‌کند.","أقسّم وقتي بين تطوير الميزات والتدريس. شرح الكود للطلاب يجعلني أكتب كودًا أنظف، والعمل الحقيقي يجعلني مدرّسًا أفضل."],
+["years building for the web","سال تجربه در توسعه وب","سنوات في تطوير الويب"],["live projects online","پروژه آنلاین","مشاريع منشورة"],["months teaching so far","ماه تدریس تاکنون","أشهر تدريس حتى الآن"],
+["Where I have worked","سوابق کاری من","أين عملت"],
+["May 2026 to now","خرداد ۱۴۰۵ تا اکنون","مايو 2026 حتى الآن"],["Early 2026 to May 2026","بهمن ۱۴۰۴ تا اردیبهشت ۱۴۰۵","بداية 2026 حتى مايو 2026"],["March 2025 to now","اسفند ۱۴۰۳ تا اکنون","مارس 2025 حتى الآن"],
+["Web Developer and Instructor, AIOLearn","توسعه‌دهنده وب و مدرس، AIOLearn","مطوّر ويب ومدرّس، AIOLearn"],["Freelance Full-Stack Developer","توسعه‌دهنده فول‌استک فریلنسر","مطوّر Full-Stack مستقل"],["Front-End Developer, Sedreh and Data Pardaz","توسعه‌دهنده فرانت‌اند، سدره و داده‌پرداز","مطوّر واجهات أمامية، Sedreh وData Pardaz"],
+["I teach web development to students, review their code, guide them through hands-on projects and help build the platform itself.","به دانشجویان توسعه وب آموزش می‌دهم، کدشان را بررسی می‌کنم، آن‌ها را در پروژه‌های عملی راهنمایی می‌کنم و در ساخت خود پلتفرم مشارکت دارم.","أُعلّم الطلاب تطوير الويب، وأراجع أكوادهم، وأرشدهم في مشاريع عملية، وأساهم في بناء المنصة نفسها."],
+["I delivered a clinic website from requirements to deployment, with a secure custom admin panel so the owner can manage content without technical help. I also advised on SEO and load speed.","وب‌سایت یک کلینیک را از تحلیل نیازمندی‌ها تا استقرار تحویل دادم، با پنل مدیریت اختصاصی و امن تا مالک بدون دانش فنی محتوا را مدیریت کند. درباره سئو و سرعت بارگذاری هم مشاوره دادم.","سلّمت موقعًا لعيادة من تحليل المتطلبات حتى النشر، مع لوحة إدارة مخصصة وآمنة تتيح للمالك إدارة المحتوى دون خبرة تقنية. كما قدّمت استشارات حول SEO وسرعة التحميل."],
+["I built the image comparison tool for satellite photos taken at different times, a WebSocket-driven land-classification view, KML upload, offline maps and 3D imagery.","ابزار مقایسه تصاویر ماهواره‌ای در زمان‌های مختلف، نمای طبقه‌بندی کاربری زمین مبتنی بر WebSocket، آپلود KML، نقشه آفلاین و تصاویر سه‌بعدی را ساختم.","بنيت أداة مقارنة صور الأقمار الصناعية في أوقات مختلفة، وعرض تصنيف الأراضي عبر WebSocket، ورفع ملفات KML، والخرائط دون اتصال، والصور ثلاثية الأبعاد."],
+["Projects you can open","پروژه‌هایی که می‌توانید ببینید","مشاريع يمكنك فتحها"],
+["Clinic website with doctor profiles, services, articles and a secure admin dashboard.","وب‌سایت کلینیک با پروفایل پزشکان، خدمات، مقالات و داشبورد مدیریت امن.","موقع عيادة يضم ملفات الأطباء والخدمات والمقالات ولوحة إدارة آمنة."],
+["Land-use change monitoring, georeferencing and AI change detection on satellite imagery.","پایش تغییرات کاربری زمین، زمین‌مرجع‌سازی و تشخیص تغییرات با هوش مصنوعی روی تصاویر ماهواره‌ای.","مراقبة تغيّر استخدام الأراضي والمرجعية الجغرافية وكشف التغيّرات بالذكاء الاصطناعي على صور الأقمار الصناعية."],
+["Environmental data, air pollution and weather views built on the same geospatial platform.","نمایش داده‌های محیطی، آلودگی هوا و هواشناسی روی همان پلتفرم مکانی.","عرض البيانات البيئية وتلوث الهواء والطقس على المنصة الجغرافية نفسها."],
+["3D imagery","تصاویر سه‌بعدی","صور ثلاثية الأبعاد"],
+["What I build with","ابزارهایی که با آن‌ها می‌سازم","أدواتي في البناء"],["Interface.","رابط کاربری.","الواجهات."],["Maps and 3D.","نقشه و سه‌بعدی.","الخرائط والثلاثي الأبعاد."],["Data.","داده.","البيانات."],["Back end and tools.","بک‌اند و ابزارها.","الخلفية والأدوات."],
+["Computer Engineering (Software), Azad University. English at intermediate level.","مهندسی کامپیوتر (نرم‌افزار)، دانشگاه آزاد. زبان انگلیسی در سطح متوسط.","هندسة الحاسوب (برمجيات)، جامعة آزاد. اللغة الإنجليزية بمستوى متوسط."],
+["Have a map, a dashboard or a class in mind?","نقشه، داشبورد یا کلاسی در ذهن دارید؟","هل لديك خريطة أو لوحة تحكم أو دورة في ذهنك؟"],
+["© 2026 Mohammad Faramarzi","© ۲۰۲۶ محمد فرامرزی","© 2026 محمد فرامرزي"],
+["My skills","مهارت‌های من","مهاراتي"],["Hide","بستن","إخفاء"],
+["What would you like to know?","چه چیزی می‌خواهید بدانید؟","ماذا تريد أن تعرف؟"],
+["Hi, I'm Mo-Bot. I'll show you around Mohammad's work. Scroll, or tap a button below.","سلام، من مو‌بات هستم. کارهای محمد را نشانتان می‌دهم. اسکرول کنید یا یکی از دکمه‌های پایین را بزنید.","مرحبًا، أنا مو-بوت. سأعرّفك على أعمال محمد. مرّر للأسفل أو اضغط أحد الأزرار."],
+["Mohammad builds and teaches: over a year of real projects and four months as an instructor.","محمد هم می‌سازد و هم آموزش می‌دهد: بیش از یک سال پروژه واقعی و چهار ماه تدریس.","محمد يبني ويُعلّم: أكثر من عام من المشاريع الحقيقية وأربعة أشهر من التدريس."],
+["Three roles: teaching at AIOLearn, freelance full-stack work, and front-end at Sedreh.","سه نقش: تدریس در AIOLearn، کار فول‌استک فریلنسری و فرانت‌اند در سدره.","ثلاثة أدوار: التدريس في AIOLearn، وعمل Full-Stack مستقل، وواجهات أمامية في Sedreh."],
+["Three live projects. Open any card for the full story.","سه پروژه آنلاین. برای دیدن جزئیات هر کارت را باز کنید.","ثلاثة مشاريع منشورة. افتح أي بطاقة لمعرفة التفاصيل."],
+["React and Next.js for interfaces, Mapbox and three.js for maps and 3D, Node and MongoDB behind them.","React و Next.js برای رابط کاربری، Mapbox و three.js برای نقشه و سه‌بعدی، و Node و MongoDB در بک‌اند.","React وNext.js للواجهات، وMapbox وthree.js للخرائط والثلاثي الأبعاد، وNode وMongoDB في الخلفية."],
+["Want to work together, or learn with him? His email is one click away.","می‌خواهید همکاری کنید یا با او یاد بگیرید؟ ایمیلش فقط یک کلیک فاصله دارد.","تريد التعاون معه أو التعلّم على يديه؟ بريده على بُعد نقرة."],
+["Interfaces: React, Next.js, TypeScript, Tailwind. Maps and 3D: Mapbox, three.js, GSAP. Data: Redux Toolkit, React Query, WebSocket. Back end: Node, Express, MongoDB.","رابط کاربری: React، Next.js، TypeScript، Tailwind. نقشه و سه‌بعدی: Mapbox، three.js، GSAP. داده: Redux Toolkit، React Query، WebSocket. بک‌اند: Node، Express، MongoDB.","الواجهات: React وNext.js وTypeScript وTailwind. الخرائط والثلاثي الأبعاد: Mapbox وthree.js وGSAP. البيانات: Redux Toolkit وReact Query وWebSocket. الخلفية: Node وExpress وMongoDB."],
+["← All projects","→ همه پروژه‌ها","→ كل المشاريع"],["What I built","آنچه ساختم","ما الذي بنيته"],["Visit live site ↗","مشاهده سایت ↗","زيارة الموقع ↗"],["Next:","بعدی:","التالي:"]];
+const M={fa:new Map(),ar:new Map()};T.forEach(r=>{M.fa.set(r[0],r[1]);M.ar.set(r[0],r[2])});
+let lang='en';const t=s=>lang==='en'?s:(M[lang].get(s)||s);
+const SK="Interfaces: React, Next.js, TypeScript, Tailwind. Maps and 3D: Mapbox, three.js, GSAP. Data: Redux Toolkit, React Query, WebSocket. Back end: Node, Express, MongoDB.";
+const PT={fa:{
+moini:{client:'دکتر معینی، کلینیک زیبایی معینی',when:'بهمن ۱۴۰۴',role:'توسعه‌دهنده فول‌استک (فریلنسر)',intro:'وب‌سایت یک کلینیک زیبایی که پزشکان، خدمات و مقالات را معرفی می‌کند. مالک می‌تواند همه‌چیز را از یک پنل مدیریت امن و بدون دانش فنی به‌روزرسانی کند.',bul:['پروژه را از جمع‌آوری نیازمندی‌ها تا استقرار نهایی تحویل دادم.','با رندر سمت سرور Next.js سئو و سرعت بارگذاری اولیه را بهبود دادم.','بک‌اند را با Node.js و Express و APIهای RESTful پایدار ساختم.','اسکیمای MongoDB را برای پزشکان، خدمات و مقالات طوری طراحی کردم که جستجو سریع بماند.','داشبورد مدیریت با ورود، مسیرهای محافظت‌شده و عملیات CRUD روی محتوا ساختم.','رابط کاربری تمیزی طراحی کردم که پزشکان و خدمات را به بیماران معرفی می‌کند.','کد تمیز و مستندات فنی نوشتم تا تیم‌های دیگر بتوانند نگهداری کنند.'],say:'مینی‌کلینیک: یک سایت فول‌استک که از تحلیل نیازمندی تا انتشار تحویل داده شد، با پنلی که مالک به‌تنهایی مدیریت می‌کند.'},
+vira:{client:'داده‌پرداز',when:'مهر ۱۴۰۴',role:'توسعه‌دهنده فرانت‌اند',intro:'پلتفرم مکانی که تصاویر ماهواره‌ای را تحلیل می‌کند تا تغییرات کاربری زمین در طول زمان پایش شود.',bul:['پایش تغییرات کاربری زمین بر پایه تصاویر ماهواره‌ای پردازش‌شده.','زمین‌مرجع‌سازی: تطبیق تصویر بارگذاری‌شده با موقعیت احتمالی واقعی و کمک به تشخیص تصاویر تولیدشده با هوش مصنوعی از تصاویر واقعی ماهواره‌ای.','رابط‌هایی برای قابلیت‌های هوش مصنوعی مثل شناسایی تغییرات، زمین‌مرجع‌سازی و طبقه‌بندی کاربری اراضی.'],say:'ویرا تصاویر ماهواره‌ای را به پاسخ تبدیل می‌کند: چه چیزی تغییر کرده و تصویر کجای زمین گرفته شده است.'},
+sedreh:{client:'سدره (نظارت زمین)',when:'اسفند ۱۴۰۳',role:'توسعه‌دهنده فرانت‌اند',intro:'پلتفرم هوش محیطی که تصاویر ماهواره‌ای، طبقه‌بندی زمین و داده‌های محیطی را روی نقشه‌های تعاملی نشان می‌دهد.',bul:['قابلیت مقایسه تصاویر را ساختم که تفاوت دو تصویر ماهواره‌ای در زمان‌های مختلف، مثل تغییرات آب‌وهوا و رطوبت، را نشان می‌دهد.','نمای طبقه‌بندی زمین مبتنی بر WebSocket را ساختم که درصد برف و بارش، نسبت اراضی بایر و پوشش کشاورزی منطقه انتخابی کاربر را نشان می‌دهد.','آپلود KML، نقشه آفلاین و تصاویر سه‌بعدی را اضافه کردم.','روی رابط‌های شناسایی تغییرات، شناسایی اشیا، زمین‌مرجع‌سازی و پایش کاربری زمین کار کردم.'],say:'سدره ای‌آی: تصاویر ماهواره‌ای را در طول زمان مقایسه کنید و زمین را زنده روی نقشه طبقه‌بندی کنید.'}},
+ar:{
+moini:{client:'د. معيني، عيادة معيني للتجميل',when:'يناير 2026',role:'مطوّر Full-Stack (مستقل)',intro:'موقع لعيادة تجميل يعرض الأطباء والخدمات والمقالات، ويستطيع المالك تحديث كل شيء من لوحة إدارة آمنة دون خبرة تقنية.',bul:['سلّمت المشروع من جمع المتطلبات حتى النشر النهائي.','استخدمت العرض من جهة الخادم في Next.js لتحسين SEO وسرعة التحميل الأول.','بنيت الواجهة الخلفية بـ Node.js وExpress مع واجهات RESTful مستقرة.','صممت مخططات MongoDB للأطباء والخدمات والمقالات للحفاظ على سرعة البحث.','بنيت لوحة إدارة بتسجيل دخول ومسارات محمية وعمليات إنشاء وقراءة وتحديث وحذف للمحتوى.','صممت واجهة نظيفة تعرّف المرضى بالأطباء والخدمات.','كتبت كودًا نظيفًا ووثائق تقنية ليسهل على الفرق الأخرى صيانته.'],say:'عيادة معيني: موقع متكامل سُلّم من تحليل المتطلبات حتى الإطلاق، مع لوحة يديرها المالك بنفسه.'},
+vira:{client:'Data Pardaz',when:'خريف 2025',role:'مطوّر واجهات أمامية',intro:'منصة جغرافية تحلل صور الأقمار الصناعية لمراقبة تغيّر استخدام الأراضي عبر الزمن.',bul:['مراقبة تغيّر استخدام الأراضي اعتمادًا على صور أقمار صناعية معالَجة.','المرجعية الجغرافية: مطابقة الصورة المرفوعة مع موقعها الواقعي المحتمل والمساعدة في تمييز الصور المولّدة بالذكاء الاصطناعي من صور الأقمار الصناعية الحقيقية.','واجهات لميزات الذكاء الاصطناعي مثل كشف التغيّرات والمرجعية الجغرافية وتصنيف استخدام الأراضي.'],say:'فيرا تحوّل صور الأقمار الصناعية إلى إجابات: ماذا تغيّر، وأين التُقطت الصورة.'},
+sedreh:{client:'Sedreh (مراقبة الأرض)',when:'أوائل 2025',role:'مطوّر واجهات أمامية',intro:'منصة ذكاء بيئي تعرض صور الأقمار الصناعية وتصنيف الأراضي والبيانات البيئية على خرائط تفاعلية.',bul:['بنيت ميزة مقارنة الصور التي تُظهر الفروق بين صورتين التُقطتا في أوقات مختلفة، مثل تغيّرات الطقس والرطوبة.','بنيت عرض تصنيف الأراضي عبر WebSocket ويُظهر نسبة الثلج والأمطار والأراضي القاحلة والتغطية الزراعية للمنطقة التي يحددها المستخدم.','أضفت رفع ملفات KML والخرائط دون اتصال والصور ثلاثية الأبعاد.','عملت على واجهات كشف التغيّرات وكشف الأجسام والمرجعية الجغرافية ومراقبة استخدام الأراضي.'],say:'سدره AI: قارن صور الأقمار الصناعية عبر الزمن وصنّف الأرض مباشرة على الخريطة.'}}};
+const pf=id=>Object.assign({},P[id],lang==='en'?{}:PT[lang][id]);
+const tn=[];{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const k=n.nodeValue.trim();if(M.fa.has(k))tn.push([n,n.nodeValue,k])}}
+const h1=document.getElementById('h1'),H1='I turn satellite data into interfaces people can use.';
+function setLang(l){lang=l;const d=document.documentElement;d.lang=l;d.dir=l==='en'?'ltr':'rtl';
+ tn.forEach(([n,raw,k])=>{n.nodeValue=raw.replace(k,()=>t(k))});
+ const x=t(H1);h1.setAttribute('aria-label',x);h1.innerHTML=x.split(' ').map(w=>'<span class="w"><span>'+w+'</span></span>').join(' ');
+ document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));
+ try{localStorage.setItem('lang',l)}catch(e){}
+ const m=location.hash.match(/^#\/p\/(\w+)/);if(m&&P[m[1]])render(m[1]);
+ if(cur&&!bub.hidden){clearInterval(tm);bt.textContent=typeof cur==='string'?t(cur):pf(cur.p).say}
+ ScrollTrigger.refresh()}
+document.getElementById('lang').onclick=e=>{const l=e.target.dataset&&e.target.dataset.l;if(l)setLang(l)};
+const bub=document.getElementById('bub'),bt=document.getElementById('bt');let tm,auto=true;const said=new Set();
+function say(txt,force){if(!auto&&!force)return;bub.hidden=false;clearInterval(tm);
+  if(reduce){bt.textContent=txt;return}let i=0;bt.textContent='';tm=setInterval(()=>{bt.textContent=txt.slice(0,++i);if(i>=txt.length)clearInterval(tm)},16)}
+let cur=null;function sayK(k,f){cur=k;say(typeof k==='string'?t(k):pf(k.p).say,f)}
+const L={top:"Hi, I'm Mo-Bot. I'll show you around Mohammad's work. Scroll, or tap a button below.",about:'Mohammad builds and teaches: over a year of real projects and four months as an instructor.',work:'Three roles: teaching at AIOLearn, freelance full-stack work, and front-end at Sedreh.',projects:'Three live projects. Open any card for the full story.',stack:'React and Next.js for interfaces, Mapbox and three.js for maps and 3D, Node and MongoDB behind them.',contact:'Want to work together, or learn with him? His email is one click away.'};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!home.hidden&&!said.has(e.target.id)){said.add(e.target.id);sayK(L[e.target.id])}}),{threshold:.4});
+['about','work','projects','stack','contact'].forEach(id=>io.observe(document.getElementById(id)));
+setTimeout(()=>{if(!location.hash.startsWith('#/p/')){said.add('top');sayK(L.top)}},1800);
+document.getElementById('rb').onclick=()=>{if(bub.hidden){auto=true;sayK('What would you like to know?',true)}else{bub.hidden=true;auto=false}};
+const go=id=>{location.hash='#'+id};
+bub.addEventListener('click',e=>{const q=e.target.dataset.q;if(!q)return;
+  if(q==='hide'){bub.hidden=true;auto=false;return}auto=true;
+  if(q==='skills'){go('stack');sayK(SK,true)}
+  if(q==='projects'){go('projects');sayK(L.projects,true)}
+  if(q==='contact'){go('contact');sayK(L.contact,true)}});
+function render(id){const p=pf(id),i=keys.indexOf(id),n=P[keys[(i+1)%keys.length]],nk=keys[(i+1)%keys.length];
+  body.innerHTML=`<a href="#projects" class="mut inline-block mb-8 hover:opacity-70">${t('← All projects')}</a>
+  <h1 class="h1" style="font-size:clamp(2.4rem,7vw,4.6rem)">${p.t}</h1>
+  <div class="flex flex-wrap gap-2 mt-6"><span class="chip">${p.client}</span><span class="chip">${p.when}</span><span class="chip">${p.role}</span></div>
+  <p class="text-xl md:text-2xl leading-snug mt-8">${p.intro}</p>
+  <div class="glass p-7 mt-10"><h2 class="text-xl font-bold mb-4">${t('What I built')}</h2><ul class="dl mut text-lg">${p.bul.map(b=>'<li>'+b+'</li>').join('')}</ul></div>
+  <div class="mt-8"><h2 class="text-xl font-bold mb-3">${t('Stack')}</h2><div class="flex flex-wrap gap-2">${p.stack.map(x=>'<span class="chip">'+x+'</span>').join('')}</div></div>
+  <div class="mt-10 flex flex-wrap gap-3"><a class="btn b1" href="${p.url}" target="_blank" rel="noopener">${t('Visit live site ↗')}</a><a class="btn b2" href="#/p/${nk}">${t('Next:')} ${n.t}</a></div>`}
+function route(){const m=location.hash.match(/^#\/p\/(\w+)/);
+  if(m&&P[m[1]]){render(m[1]);home.hidden=true;det.hidden=false;document.title=P[m[1]].t+' — Mohammad Faramarzi';scrollTo(0,0);sayK({p:m[1]},true);
+    if(!reduce)gsap.from('#dbody>*',{y:22,opacity:0,duration:.7,stagger:.08,ease:'power3.out'})}
+  else{home.hidden=false;det.hidden=true;document.title='Mohammad Faramarzi — Front-End Developer & Instructor';
+    const id=location.hash.slice(1),el=id&&document.getElementById(id);ScrollTrigger.refresh();if(el)requestAnimationFrame(()=>el.scrollIntoView());else if(!id)scrollTo(0,0)}
+  ScrollTrigger.refresh()}
+addEventListener('hashchange',route);if(location.hash)route();
+let init='';try{init=localStorage.getItem('lang')||''}catch(e){}
+if(!init){const nl=(navigator.language||'').slice(0,2);init=(nl==='fa'||nl==='ar')?nl:'en'}
+if(init!=='en')setLang(init);
+})();
+</script>
+</body>
+</html>
